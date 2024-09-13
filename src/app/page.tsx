@@ -20,6 +20,20 @@ export default function Home() {
     })
   }
 
+    // get data
+    const GetData = ()=>{
+      axios({
+        method: 'get',
+        url: '/api/getuser'
+      })
+      .then(res => {
+        setData(res.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }
+
   const Submit = () => {
     axios({
       method: 'post',
@@ -35,20 +49,14 @@ export default function Home() {
     .catch(err => {
       console.log(err)
     })
+    GetData()
   }
 
+
+
   useEffect(() => {
-    axios({
-      method: 'get',
-      url: '/api/getuser'
-    })
-    .then(res => {
-      setData(res.data)
-    })
-    .catch(err => {
-      console.log(err)
-    })
-  }, [Submit])
+    GetData()
+  }, [])
 
   return (
     <div>
