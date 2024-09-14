@@ -10,7 +10,7 @@ export async function POST(request: NextRequest, response: Response) {
     password: String,
   });
 
-  const user = mongoose.models.user || mongoose.model('modelName', UserSchema ) 
+  const user = mongoose.models.user || mongoose.model('user', UserSchema ) 
 
   await user.create({ 
     name: data.name, 

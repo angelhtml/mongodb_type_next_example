@@ -10,9 +10,11 @@ export async function GET(request: Request, res : any) {
     password: String
 });
 
-  const user = mongoose.models.user || mongoose.model('modelName', UserSchema )
+  const user = mongoose.models.user || mongoose.model('user', UserSchema )
 
-  const result = await user.find({})
+  const result = await user.aggregate([
+    {$unset: 'password'}
+  ])
   
   return NextResponse.json(result)
 }

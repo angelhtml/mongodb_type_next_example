@@ -58,6 +58,20 @@ export default function Home() {
     GetData()
   }, [])
 
+  const Remove = (id: any) =>{
+    axios({
+      method: 'get',
+      url: `/api/removeuser/${id}`,
+    })
+    .then(res => {
+      console.log(res.data)
+      GetData()
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
   return (
     <div>
       <div>
@@ -69,9 +83,9 @@ export default function Home() {
         {
           data && data.map((item: any) => {
             return (
-              <div key={item._id}>
+              <div className="border-2 border-red-500 p-2 m-6 flex justify-between" key={item._id}>
                 <p>{item.name}</p>
-                <p>{item.password}</p>
+                <button onClick={() => Remove(item._id)} className="text-red-500">remove</button>
               </div>
             )
           })
